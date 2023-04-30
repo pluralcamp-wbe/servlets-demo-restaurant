@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+    version="2.4">
+
+    <display-name>Quark's Restaurant</display-name>
+    <description>
+        The menu and online ordering system for Quark's Restaurant
+    </description>
+
+    <servlet>
+        <servlet-name>helloMornServlet</servlet-name>
+        <servlet-class>com.pluralcamp.servlets.HelloMornServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>helloMornServlet</servlet-name>
+        <url-pattern>/hellomorn.html</url-pattern>
+    </servlet-mapping>
+</web-app> 
