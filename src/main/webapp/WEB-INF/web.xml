@@ -19,6 +19,11 @@
         <servlet-class>com.pluralcamp.servlets.ViewMenuServlet</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>MenuSearchServlet</servlet-name>
+        <servlet-class>com.pluralcamp.servlets.MenuSearchServlet</servlet-class>
+    </servlet>
+
     <servlet-mapping>
         <servlet-name>HelloMornServlet</servlet-name>
         <url-pattern>/hellomorn.html</url-pattern>
@@ -27,5 +32,10 @@
     <servlet-mapping>
         <servlet-name>ViewMenuServlet</servlet-name>
         <url-pattern></url-pattern><!-- home page: empty mapping -->
-    </servlet-mapping>    
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>MenuSearchServlet</servlet-name>
+        <url-pattern>/searchResults.html</url-pattern><!-- must be action value in form -->
+    </servlet-mapping>
 </web-app> 
