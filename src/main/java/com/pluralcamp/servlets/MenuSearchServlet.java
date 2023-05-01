@@ -23,13 +23,18 @@ public class MenuSearchServlet extends HttpServlet {
         List<MenuItem> menuItems = menuDataService.find(searchTerm);
 
         out.println("<html><body><h1>Quark's Restaurant</h1>");
-        out.printf("<h2>Dishes containing %s:</h2><ul>", searchTerm);
+        if (menuItems.size() > 0) {
+            out.printf("<h2>Dishes containing %s:</h2><ul>", searchTerm);
 
-        for(MenuItem menuItem : menuItems){
-            out.printf("<li>%s - %s</li>%n", menuItem, menuItem.getDescription());
+            for (MenuItem menuItem : menuItems) {
+                out.printf("<li>%s - %s</li>%n", menuItem, menuItem.getDescription());
+            }
+            out.println("</ul>");
+        } else {
+            out.printf("<p>Sorry, we do not have dished containing %s</p>", searchTerm);
         }
 
-        out.println("</ul></body></html>");
+        out.println("</body></html>");
         out.close();
 }
 }
