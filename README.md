@@ -1,12 +1,20 @@
 # Servlets: Restaurant
 
-## Step 2: Search your favourite dish:
+## Step 3: GET and POST:
 
-1. Add ``search.html`` to the webapp directory. Checkout it can be accessed adding its name in the URL.
+Do we use ``<form action="/searchResults.html" method="GET">`` or  
+``<form action="/searchResults.html" method="POST">`` ?
 
-> No need to add any entry to the web.xml file, because we have not added any servlet. We have added an HTML file, which is directly accessible if located in the webapp directory.
+GET: key/value pair added in the URL.
 
-2. Create a servlet for the results of the search, mapping it to the path ``/searchResults.html``.
+```
+/searchResults.html?searchTerm=vegetable
+```
 
-> How do we extract a parameter value (searchTerm) that was entered in the form? From the ``name`` atribute in the form, to using the ``request`` object to retrieve that value using the ``getParameter("searchTerm")`` method.
+POST: The data has been transfer within the Http header
 
+POST will be used for LOGIN form.
+
+POST should be used when data is modified, added, deleted ... i.e. there is a side effect and you do not want the action to be repeated by the user.
+
+GET: you can bookmark and link: repeated action with **no side effects**.
