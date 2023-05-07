@@ -10,6 +10,8 @@ import com.pluralcamp.domain.MenuItem;
 
 public class MenuDataService {
 
+	public static int counter = 0;
+
 	List<MenuItem> menuItems = new ArrayList<MenuItem>();
 	Map<MenuItem,Integer> currentOrder = new HashMap<MenuItem,Integer>();
 	
@@ -25,6 +27,7 @@ public class MenuDataService {
 		menuItems.add(new MenuItem(9, "Fruit skewers", "Our nostalgic 80s desert is super healthy... then we add luxurious vanilla ice-cream and chocolate sauce. ", MenuCategory.DESERT, 6.99));
 		menuItems.add(new MenuItem(10, "Coffee", "Espresso, Americano, Latte or Capuccino? Tell us how you like it!", MenuCategory.DRINK, 2.99));
 		menuItems.add(new MenuItem(11, "Tea", "We have a full range of classic and herbal teas.", MenuCategory.DRINK, 2.99));	
+		counter++;
 	}
 	
 	public List<MenuItem>  getFullMenu() {
