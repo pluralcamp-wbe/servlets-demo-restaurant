@@ -15,15 +15,17 @@ public class OrderReceivedServlet extends HttpServlet {
 
     MenuDataService menuDataService = new MenuDataService();
 
-    public void service(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         int maxId = menuDataService.getFullMenu().size();
 
         for (int i = 0; i < maxId; i++) {
             String quantity = request.getParameter("item_" + i);
             try {
-                int q = Integer.parseInt(quantity);
-                if (q > 0){
+                int q = 0;
+                if (quantity != null && !quantity.trim().equals(""))
+                    q = Integer.parseInt(quantity);
+                if (q > 0) {
                     System.out.printf("You have ordered %d items of %s%n", q, menuDataService.getItem(i));
                     menuDataService.addToOrder(menuDataService.getItem(i), q);
                 }
@@ -33,16 +35,22 @@ public class OrderReceivedServlet extends HttpServlet {
             }
         }
 
+        System.out.println("-----> A new order has been received <-----");
+
         Double total = menuDataService.getOrderTotal();
 
-        PrintWriter out = response.getWriter();
-        response.setContentType("text/html");
-        out.println("<html><body><h1>Quark's Restaurant</h1>");
-        out.println("<h2>Order your food</h2>");
+        response.sendRedirect("/thankYou.html?total=" + total);//is sending a 302
 
-        out.printf("Thank you - your order has been received. You need to pay %.2f euros", total);
+        // PrintWriter out = response.getWriter();
+        // response.setContentType("text/html");
+        // out.println("<html><body><h1>Quark's Restaurant</h1>");
+        // out.println("<h2>Order your food</h2>");
 
-        out.println("</body></html>");
-        out.close();
+        // out.printf("Thank you - your order has been received. You need to pay %.2f euros", total);
+
+        // out.println("</body></html>");
+        // out.close();  
+        // vscode: Ctrl+k Ctrl-c (comment) or Ctrl+k Ctrl+u (uncomment)
+
     }
 }

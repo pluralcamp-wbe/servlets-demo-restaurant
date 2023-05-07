@@ -28,7 +28,8 @@ public class ViewMenuServlet extends HttpServlet {
                     out.printf("<li>%s</li>%n", menuItem);
                 }
                 out.println("</ul>");
-                out.println("<a href='searchResults.html?searchTerm=chicken'>View all our chicken dishes</a>");
+                out.println("<p><a href='searchResults.html?searchTerm=chicken'>View all our chicken dishes</a></p>");
+                out.println("<p><a href='order.html'>Make an order here</a></p>");
                 out.println("</body></html>");
                 out.close();
     }

@@ -34,6 +34,11 @@
         <servlet-class>com.pluralcamp.servlets.OrderReceivedServlet</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>ThankYouServlet</servlet-name>
+        <servlet-class>com.pluralcamp.servlets.ThankYouServlet</servlet-class>
+    </servlet>
+
     <servlet-mapping>
         <servlet-name>HelloMornServlet</servlet-name>
         <url-pattern>/hellomorn.html</url-pattern>
@@ -58,4 +63,9 @@
         <servlet-name>OrderReceivedServlet</servlet-name>
         <url-pattern>/orderReceived.html</url-pattern>
     </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ThankYouServlet</servlet-name>
+        <url-pattern>/thankYou.html</url-pattern>
+    </servlet-mapping>    
 </web-app> 
