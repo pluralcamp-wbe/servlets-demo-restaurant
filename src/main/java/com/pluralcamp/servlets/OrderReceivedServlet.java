@@ -10,6 +10,7 @@ import com.pluralcamp.data.MenuDataService;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 public class OrderReceivedServlet extends HttpServlet {
 
@@ -39,7 +40,11 @@ public class OrderReceivedServlet extends HttpServlet {
 
         Double total = menuDataService.getOrderTotal();
 
-        response.sendRedirect("/thankYou.html?total=" + total);//is sending a 302
+        HttpSession session = request.getSession();
+        session.setAttribute("total", total);
+
+        response.sendRedirect("thankYou.html");
+        // response.sendRedirect("thankYou.html?total=" + total);//is sending a 302
 
         // PrintWriter out = response.getWriter();
         // response.setContentType("text/html");

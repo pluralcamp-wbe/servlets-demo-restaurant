@@ -1,33 +1,62 @@
 # Servlets: Restaurant
 
-## Step 5: Allow ONLY POST or GET
+## Step 6: Sessions and Cookies
 
-1. We need to replace the ``service()`` method for the ``doPost()`` or the ``doGet()`` methods.
+> HTTP is a stateless protocol: each time we visit a server, once the browser gets the response, the connection is drop and terminated. **No state is preserved** throught the HTTP request-response protocol (the server forgets all about the client).
 
-When a form is set to use the POST verb but the servlet **only** has the ``doGet()`` method implemented, we get a "_Http Status 405 - Http method POST is not supported by this URL_".
+Cookies are text files sent by the server, stored in the client, and limited in size (4Kb max).
 
-Similarly, if the form is set to use the GET method but the servlet **only** has the ``doPost()`` method implemented, we get a similar 405 error.
+For security reasons, cookies cannot be binary files.
 
-> Within a single servlet, we can have both the ``doGet()`` **and** the ``doPost()`` methods simultaneously.
+The shopping cart is **not** stored in a cookie.
 
-Having both methods is quite common and allows the servlet to work with any werb from the form, **doing different things depending on what verb is used in the form** (as opposite of using only the ``service()`` method).
+You cannot always assume that users will allow cookies.
 
-- Using only ``doPost()`` with the form sending the request via the POST verb, even with a warning from the browser, the end user still can resend the request, by refreshing the page, and then **the order is duplicated** !! . 
+Java api for managing cookies is not easy: best approach is, instead of cookies, use **server side Java Sessions** (its api is so simple): we will ask the Servlets to use a cookie automatically and transparently: this cookie will only store a **unique id** for each user: **the user id**. 
 
-> To avoid or get around this _"refreshing"_ problem, we need to use a **design pattern** for web development called **``POST-REDIRECT-GET``**.
+The user id will also be stored in the database, where all the information about the user is persisted: in particular, the user's session data.
 
-## The ``POST-REDIRECT-GET`` pattern
+> When the user visits again the shop, the server will retrieve the user id from the cookie, find a match in the database, and restore the session for that user.
 
-![POST-REDIRECT-GET](images/post-redirect-get.png)
+_This works fine when users allow cookies_.
 
-> If the user refreshes, it's not going to resubmit the post, but the latest action which is a GET.
+The servlet api for sessions is really simple:
 
-[Http status codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes)
+```java
+HttpSession session = request.getSession();
+session.setAttribute("cart", cart);
+```
 
-Redirect uses 301 (permanent redirect) or 302 (temporary redirect) or 303:
+If it's the first time the user visits the shop and there is no cookie, ``session`` will get a **blank** HttpSession object back.
 
-> **303 See Other (since HTTP/1.1)**  
-The response to the request can be found under another URI using the GET method. When received in response to a POST (or PUT/DELETE), the client should presume that the server has received the data and should issue a new GET request to the given URI.
+If there's a cookie (revisiting user) then we will get the appropiate session object for that user.
+
+HttpSession is like a map.
+
+## Working with sessions
+
+ThankYouServlet gets the total amount of the order in the URL, which is prone to errors, duplicates, etc.
+
+**Instead of including the total in the URL, we will store it in a session variable**. (_In a production system, the amount will be persisted in the database, and the session will contain the user id_). And later on ThankYouServlet will retrieve it from the session to display it on the page.
+
+### Viewing the cookie
+
+Chrome: Developer Tools > Application > Cookies
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
 
 
 
